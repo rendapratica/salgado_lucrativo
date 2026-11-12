@@ -1,0 +1,56 @@
+Coloque aqui as fotos das receitas, uma por arquivo, em JPG, com o nome igual ao id.
+Exemplo: coxinha-de-frango-tradicional.jpg
+Se a foto não existir, o sistema mostra a ilustração automaticamente.
+
+Lista de nomes (51):
+coxinha-de-frango-tradicional.jpg
+coxinha-de-frango-com-catupiry.jpg
+coxinha-de-carne-seca-com-requeijao.jpg
+coxinha-de-calabresa-com-queijo.jpg
+coxinha-assada-de-batata-doce-com-frango.jpg
+coxinha-de-camarao.jpg
+pastel-de-carne.jpg
+pastel-de-queijo.jpg
+pastel-de-frango-com-catupiry.jpg
+pastel-de-pizza.jpg
+pastel-de-palmito.jpg
+pastel-de-carne-seca-com-abobora.jpg
+empada-de-frango.jpg
+empada-de-palmito.jpg
+empada-de-queijo-com-tomate-seco.jpg
+empada-de-carne-seca-com-requeijao.jpg
+empada-de-camarao.jpg
+esfiha-aberta-de-carne.jpg
+esfiha-de-queijo.jpg
+esfiha-de-frango-com-catupiry.jpg
+esfiha-de-escarola-com-queijo.jpg
+esfiha-fechada-de-carne.jpg
+quibe-frito-de-carne.jpg
+quibe-assado-de-forma.jpg
+quibe-recheado-com-requeijao.jpg
+quibe-de-grao-de-bico-assado.jpg
+risole-de-presunto-e-queijo.jpg
+risole-de-frango.jpg
+risole-de-carne.jpg
+risole-de-milho-com-queijo.jpg
+enroladinho-de-salsicha.jpg
+enroladinho-de-presunto-e-queijo.jpg
+enroladinho-de-calabresa-com-queijo.jpg
+enroladinho-de-frango-com-requeijao.jpg
+folhado-de-queijo.jpg
+folhado-de-presunto-e-queijo.jpg
+folhado-de-frango-com-requeijao.jpg
+folhado-de-brocolis-com-ricota.jpg
+pao-de-queijo-mineiro.jpg
+pao-de-batata-recheado.jpg
+mini-pizza-de-forno.jpg
+pao-de-linguica.jpg
+biscoito-de-polvilho-salgado-assado.jpg
+mini-coxinha-para-festa.jpg
+bolinha-de-queijo.jpg
+mini-quibe.jpg
+mini-pastel-de-festa.jpg
+mini-risole-de-presunto-e-queijo.jpg
+croquete-de-carne.jpg
+bolinho-de-arroz.jpg
+bolinho-de-mandioca-com-carne-seca.jpg
