@@ -95,6 +95,15 @@
     $('#f-unit').innerHTML = SL.ui.options(SL.UNITS_SALE, 'unidade');
     $('#btn-new').innerHTML = icon('plus') + ' Novo produto';
     $('#photo-label').innerHTML = icon('camera') + ' Escolher foto';
+    // Exemplo do campo "Nome do produto": sorteia um salgado de um dos tipos da biblioteca de receitas
+    // (Coxinha, Pastel, Empada, Esfiha, Quibe…) em vez de ficar sempre "Coxinha".
+    const byType = {};
+    (SL.RECIPES || []).forEach((r) => { (byType[r.category] = byType[r.category] || []).push(r.name); });
+    const types = Object.keys(byType).filter((t) => t !== 'Outros');
+    if (types.length) {
+      const names = byType[types[Math.floor(Math.random() * types.length)]];
+      $('#f-name').placeholder = 'Ex.: ' + names[Math.floor(Math.random() * names.length)];
+    }
     $$('[data-close]').forEach((b) => { if (b.classList.contains('icon-only')) b.innerHTML = icon('x'); });
     $('#q').addEventListener('input', SL.ui.debounce(render, 150)); $('#cat').addEventListener('change', render);
     $('#btn-new').addEventListener('click', () => openForm(null));

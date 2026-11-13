@@ -30,7 +30,7 @@
       '<div class="row" style="margin-top:18px"><a class="btn gold" href="' + (hasProducts ? 'dashboard.html' : 'produtos.html') + '">' + (hasProducts ? 'Abrir meu painel' : 'Cadastrar meu primeiro produto') + '</a>' +
       '<a class="btn" style="background:rgba(255,255,255,.12);color:#fff" href="receitas.html">' + icon('book') + ' Ver receitas</a>' +
       (SL.mode.isDemo() ? '' : '<button class="btn" style="background:rgba(255,255,255,.12);color:#fff" type="button" data-act="enter-demo">' + icon('eye') + ' Conhecer com exemplos</button>') + '</div></div>' +
-      '<div class="hero-art">' + SL.art('mix', { label: 'Ilustração de coxinha, pastel, quibe e outros salgados' }) + '</div></section>' +
+      '<div class="hero-art"><img src="img/home-salgados.jpg" alt="Coxinhas, pastéis, quibes, empadas e enroladinhos numa travessa de madeira" width="1600" height="873" decoding="async" style="display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:42% center;border-radius:18px"></div></section>' +
 
       (backupOld ? '<div class="alert section">' + icon('shield') + '<div><b>Hora de fazer um backup.</b> Seus dados ficam só neste aparelho. <a href="backup.html">Salvar um backup agora</a>.</div></div>' : '') +
 
