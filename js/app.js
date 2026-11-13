@@ -267,16 +267,42 @@
     if (!recIdx) { recIdx = new Map(); (SL.RECIPES || []).forEach((r) => recIdx.set(norm(r.name), r.photo)); }
     return recIdx.get(norm(name)) || '';
   };
+  /* Foto por parte do nome: "Coxinha de frango" casa com a receita "Coxinha de frango tradicional",
+     "Esfiha de carne" com "Esfiha aberta de carne", "Mini coxinha (cento)" com "Mini coxinha para festa"… */
+  const STOP = { de: 1, da: 1, do: 1, com: 1, e: 1, a: 1, o: 1, para: 1, cento: 1, kit: 1, combo: 1, un: 1, unidade: 1 };
+  const words = (s) => norm(String(s || '').replace(/\([^)]*\)/g, ' ')).split(' ').filter((w) => w && !STOP[w]);
+  const stem = (w) => w.replace(/(s|es)$/, '');
+  let recList = null;
+  const fuzzyRecipePhoto = (name) => {
+    if (!recList) recList = (SL.RECIPES || []).map((r) => ({ r, w: words(r.name).map(stem) }));
+    const q = words(name).map(stem); if (!q.length) return '';
+    // 1) todas as palavras do produto aparecem na receita (a mais curta/parecida vence)
+    let best = null;
+    recList.forEach((x) => { if (q.every((w) => x.w.indexOf(w) >= 0) && (!best || x.w.length < best.w.length)) best = x; });
+    if (best) return best.r.photo;
+    // 2) mesmo tipo (primeira palavra) — ex.: "Quibe de carne seca" -> qualquer quibe
+    const mini = q[0] === 'mini' && q.length > 1;
+    const key = mini ? q[1] : q[0];
+    const same = recList.find((x) => mini ? (x.w[0] === 'mini' && x.w[1] === key) : x.w[0] === key);
+    return same ? same.r.photo : '';
+  };
+  /* Se a foto da receita não existir no site, usa um recorte da foto geral dos salgados (img/tipos/). */
+  const TIPOS = [['mini coxinha', 'mini-coxinha'], ['coxinha', 'coxinha'], ['quibe', 'quibe'], ['pastel', 'pastel'], ['empada', 'empada'], ['enroladinho', 'enroladinho']];
+  const tipoPhoto = (name) => { const n = norm(name); const t = TIPOS.find((x) => n.indexOf(x[0]) >= 0); return t ? 'img/tipos/' + t[1] + '.jpg' : ''; };
   const miniPath = (p) => (/^img\/receitas\/[^/]+\.jpg$/.test(p) ? p.replace('/receitas/', '/receitas/mini/') : p);
   const thumb = (item, fallbackKind, opts) => {
     const art = SL.art(fallbackKind || 'mix', { label: 'Ilustração: ' + item.name });
-    let photo = item.photo || recipePhoto(item.name);
+    let photo = item.photo || recipePhoto(item.name) || fuzzyRecipePhoto(item.name);
+    const tipo = tipoPhoto(item.name);
+    if (!photo) photo = tipo;
     if (!photo) return art;
     if (!(opts && opts.full)) photo = miniPath(photo);
     item = Object.assign({}, item, { photo });
     // foto do usuário (data URL) substitui a ilustração; arquivo em img/ cobre a ilustração e some se não existir
     if (/^data:/.test(item.photo)) return '<img src="' + esc(item.photo) + '" alt="' + esc(item.name) + '" loading="lazy">';
-    return art + '<img class="ph" src="' + esc(item.photo) + '" alt="' + esc(item.name) + '" loading="lazy" onerror="this.remove()">';
+    // se o arquivo da receita não existir, tenta o recorte do tipo; se também não existir, volta para a ilustração
+    const onerr = tipo && item.photo !== tipo ? "if(!this.dataset.t){this.dataset.t=1;this.src='" + tipo + "'}else{this.remove()}" : 'this.remove()';
+    return art + '<img class="ph" src="' + esc(item.photo) + '" alt="' + esc(item.name) + '" loading="lazy" onerror="' + onerr + '">';
   };
 
   const mini = (item) => '<span class="mini">' + thumb(item, 'mix') + '</span>';
