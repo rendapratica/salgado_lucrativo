@@ -23,7 +23,7 @@
 
   function barList(list, valueOf, label) {
     const max = list.length ? Math.max.apply(null, list.map(valueOf).concat([1])) : 1;
-    return '<div class="bars">' + list.map((t, i) => '<div class="bar-row"><span><span class="rank">' + (i + 1) + '</span>' + esc(t.name) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(5, (Math.max(valueOf(t), 0) / max) * 100) + '%"></div></div><b>' + label(t) + '</b></div>').join('') + '</div>';
+    return '<div class="bars">' + list.map((t, i) => '<div class="bar-row"><span><span class="rank">' + (i + 1) + '</span>' + SL.ui.mini(t) + esc(t.name) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(5, (Math.max(valueOf(t), 0) / max) * 100) + '%"></div></div><b>' + label(t) + '</b></div>').join('') + '</div>';
   }
 
   function render() {

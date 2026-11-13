@@ -261,15 +261,26 @@
     if (from > to) return { error: 'A data inicial não pode ser depois da final.' };
     return { from, to };
   }
-  const thumb = (item, fallbackKind) => {
-    const art = SL.art(fallbackKind, { label: 'Ilustração: ' + item.name });
-    if (!item.photo) return art;
+  const norm = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  let recIdx = null;
+  const recipePhoto = (name) => {
+    if (!recIdx) { recIdx = new Map(); (SL.RECIPES || []).forEach((r) => recIdx.set(norm(r.name), r.photo)); }
+    return recIdx.get(norm(name)) || '';
+  };
+  const miniPath = (p) => (/^img\/receitas\/[^/]+\.jpg$/.test(p) ? p.replace('/receitas/', '/receitas/mini/') : p);
+  const thumb = (item, fallbackKind, opts) => {
+    const art = SL.art(fallbackKind || 'mix', { label: 'Ilustração: ' + item.name });
+    let photo = item.photo || recipePhoto(item.name);
+    if (!photo) return art;
+    if (!(opts && opts.full)) photo = miniPath(photo);
+    item = Object.assign({}, item, { photo });
     // foto do usuário (data URL) substitui a ilustração; arquivo em img/ cobre a ilustração e some se não existir
     if (/^data:/.test(item.photo)) return '<img src="' + esc(item.photo) + '" alt="' + esc(item.name) + '" loading="lazy">';
     return art + '<img class="ph" src="' + esc(item.photo) + '" alt="' + esc(item.name) + '" loading="lazy" onerror="this.remove()">';
   };
 
-  SL.ui = { icon, esc, money, int, pct, signed, $, $$, debounce, toast, confirm: confirmBox, openDialog, closeDialog, showErrors, formData, fillForm, moneyStr, options, handleError, tryForce, readImage, download, downloadCSV, boot, stat, emptyState, periodPicker, readPeriod, thumb, renderMode };
+  const mini = (item) => '<span class="mini">' + thumb(item, 'mix') + '</span>';
+  SL.ui = { mini, icon, esc, money, int, pct, signed, $, $$, debounce, toast, confirm: confirmBox, openDialog, closeDialog, showErrors, formData, fillForm, moneyStr, options, handleError, tryForce, readImage, download, downloadCSV, boot, stat, emptyState, periodPicker, readPeriod, thumb, renderMode };
 
   /* Paginação automática: tabelas longas mostram 30 linhas e um botão "Mostrar mais" (mantém o celular leve) */
   const STEP = 30;

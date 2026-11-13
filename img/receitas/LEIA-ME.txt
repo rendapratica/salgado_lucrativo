@@ -1,4 +1,4 @@
-Coloque aqui as fotos das receitas, uma por arquivo, em JPG, com o nome igual ao id.
+Fotos otimizadas (900 px). As miniaturas das listas ficam em mini/ (360 px), com o mesmo nome.
 Exemplo: coxinha-de-frango-tradicional.jpg
 Se a foto não existir, o sistema mostra a ilustração automaticamente.
 

@@ -245,3 +245,8 @@ details.help { background: var(--cream); border: 1px solid var(--line); border-r
 .thumb { position: relative; }
 .thumb img.ph, .view-photo img.ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .recipe-hero { position: relative; overflow: hidden; }
+
+/* miniaturas de salgados nas listas */
+.mini { position: relative; display: inline-block; width: 44px; height: 44px; border-radius: 10px; overflow: hidden; vertical-align: middle; margin-right: 10px; background: var(--beige); flex: none; }
+.mini > svg, .mini > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mini > img.ph { position: absolute; inset: 0; }

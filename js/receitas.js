@@ -34,7 +34,7 @@
     const r = find(key); if (!r) return;
     $('#v-title').textContent = r.name;
     $('#v-body').innerHTML =
-      '<div class="recipe-hero">' + SL.ui.thumb(r, r.art) + '</div>' +
+      '<div class="recipe-hero">' + SL.ui.thumb(r, r.art, { full: true }) + '</div>' +
       '<div class="facts"><div class="fact"><span>Categoria</span><b>' + esc(r.category) + '</b></div><div class="fact"><span>Rendimento</span><b>' + esc(r.yield) + '</b></div><div class="fact"><span>Tempo de preparo</span><b>' + esc(r.time) + '</b></div>' +
       '<div class="fact"><span>Dificuldade</span><b>' + esc(r.difficulty || 'Fácil') + '</b></div><div class="fact"><span>Custo estimado</span><b>' + (r.estimatedCost > 0 ? money(r.estimatedCost) + ' <span class="small muted">(receita toda)</span>' : '—') + '</b></div>' +
       '<div class="fact"><span>Sugestão de venda</span><b>' + (r.suggestedPrice > 0 ? money(r.suggestedPrice) + ' / un.' : '—') + '</b></div></div>' +

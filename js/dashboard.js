@@ -59,7 +59,7 @@
     const max = Math.max.apply(null, list.map(T).concat([1]));
     const isLow = (p) => p.minStock > 0 && T(p) <= p.minStock;
     $('#stock').innerHTML = '<p class="muted" style="margin-top:-6px"><b>' + int(total) + '</b> salgados em estoque, que valem <b>' + money(value) + '</b> a preço de venda.</p><div class="bars">' +
-      list.map((p) => '<div class="bar-row"><span>' + esc(p.name) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(T(p) ? 3 : 0, (T(p) / max) * 100) + '%;' + (isLow(p) || !T(p) ? 'background:linear-gradient(90deg,#e8731a,#b3372f)' : '') + '"></div></div><b>' + int(T(p)) + (T(p) === 0 ? ' · esgotado' : isLow(p) ? ' · baixo' : '') + '<span class="small muted" style="font-weight:400"> (' + int(p.stockReady) + ' pr. / ' + int(p.stockFrozen) + ' cg.)</span></b></div>').join('') + '</div>';
+      list.map((p) => '<div class="bar-row"><span>' + SL.ui.mini(p) + esc(p.name) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(T(p) ? 3 : 0, (T(p) / max) * 100) + '%;' + (isLow(p) || !T(p) ? 'background:linear-gradient(90deg,#e8731a,#b3372f)' : '') + '"></div></div><b>' + int(T(p)) + (T(p) === 0 ? ' · esgotado' : isLow(p) ? ' · baixo' : '') + '<span class="small muted" style="font-weight:400"> (' + int(p.stockReady) + ' pr. / ' + int(p.stockFrozen) + ' cg.)</span></b></div>').join('') + '</div>';
   }
 
   async function alerts() {
